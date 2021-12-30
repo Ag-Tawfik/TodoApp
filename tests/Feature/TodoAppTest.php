@@ -29,7 +29,6 @@ class TodoAppTest extends TestCase
     public function testPostMethod()
     {
         $updatedData = array();
-        $updatedData['todolist_id'] = "1";
         $updatedData['name'] = 'partner';
         $updatedData['description'] = 'seller';
         $updatedData['type'] = 'en';

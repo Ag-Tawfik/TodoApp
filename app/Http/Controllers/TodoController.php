@@ -35,7 +35,7 @@ class TodoController extends Controller
         return new TodoResource($todo);
     }
 
-    public function update(updateRequest $request, $id)
+    public function update(TodoRequest $request, $id)
     {
 
         $todo = Todo::findOrFail($id);
