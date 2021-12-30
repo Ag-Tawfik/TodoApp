@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Task;
 use Tests\TestCase;
 use App\Models\Todo;
 use Illuminate\Support\Facades\Session;

@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class TodoResource extends JsonResource
+class TaskResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -19,8 +19,8 @@ class TodoResource extends JsonResource
             // 'id' => $this->id,
             // 'name' => $this->name,
             // 'description' => $this->description,
+            // 'type' => $this->type,
+            // 'day' => $this->day,
         ];
     }
 }
-
-// manipulate the response

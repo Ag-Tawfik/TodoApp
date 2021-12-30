@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\TasksController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,9 @@ Route::post("/todos", [TodoController::class, "store"]);
 Route::get("/todos/{id}", [TodoController::class, "show"]);
 Route::put("/todos/{id}", [TodoController::class, "update"]);
 Route::delete("/todos/{id}", [TodoController::class, "destroy"]);
+
+Route::get("/tasks", [TasksController::class, "index"]);
+Route::post("/task", [TasksController::class, "store"]);
+Route::get("/task/{id}", [TasksController::class, "show"]);
+Route::put("/task/{id}", [TasksController::class, "update"]);
+Route::delete("/task/{id}", [TasksController::class, "destroy"]);
