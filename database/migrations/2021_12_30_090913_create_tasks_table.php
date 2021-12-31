@@ -15,7 +15,7 @@ class CreateTasksTable extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('todo_id');
+            $table->integer('todo_id')->unsigned()->nullable();
             $table->string('name');
             $table->text('description');
             $table->enum('type', ['Normal', 'Urgent']);
@@ -23,7 +23,7 @@ class CreateTasksTable extends Migration
             $table->enum('day', ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']);
             $table->timestamps();
 
-            $table->foreign('todo_id')->references('id')->on('todo')->onDelete('cascade');
+            //$table->foreign('todo_id')->references('id')->on('todo')->onDelete('cascade');
         });
     }
 

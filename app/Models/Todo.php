@@ -17,6 +17,5 @@ class Todo extends Model
     public function tasks()
     {
         return $this->hasMany(Task::class); 
-        // 'todo_id', 'id' 
     }
 }

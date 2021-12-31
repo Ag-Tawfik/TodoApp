@@ -3,7 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TodoController;
-use App\Http\Controllers\TasksController;
+use App\Http\Controllers\TaskController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,14 +22,14 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 
-Route::get("/todo", [TodoController::class, "index"]);
-Route::post("/todos", [TodoController::class, "store"]);
-Route::get("/todos/{id}", [TodoController::class, "show"]);
-Route::put("/todos/{id}", [TodoController::class, "update"]);
-Route::delete("/todos/{id}", [TodoController::class, "destroy"]);
+Route::get("/todos", [TodoController::class, "index"]);
+Route::post("/todo", [TodoController::class, "store"]);
+Route::get("/todo/{id}", [TodoController::class, "show"]);
+Route::put("/todo/{id}", [TodoController::class, "update"]);
+Route::delete("/todo/{id}", [TodoController::class, "destroy"]);
 
-Route::get("/tasks", [TasksController::class, "index"]);
-Route::post("/task", [TasksController::class, "store"]);
-Route::get("/task/{id}", [TasksController::class, "show"]);
-Route::put("/task/{id}", [TasksController::class, "update"]);
-Route::delete("/task/{id}", [TasksController::class, "destroy"]);
+Route::get("/tasks", [TaskController::class, "index"]);
+Route::post("/task", [TaskController::class, "store"]);
+Route::get("/task/{id}", [TaskController::class, "show"]);
+Route::put("/task/{id}", [TaskController::class, "update"]);
+Route::delete("/task/{id}", [TaskController::class, "destroy"]);
