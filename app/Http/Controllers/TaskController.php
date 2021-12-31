@@ -21,16 +21,6 @@ class TaskController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -43,8 +33,9 @@ class TaskController extends Controller
         $task->description = $request->description;
         $task->type = $request->type;
         $task->day = $request->day;
-        if ($task->save())
-            return new TaskResource($task);
+
+        $task->save();
+        return new TaskResource($task);
     }
 
     /**
@@ -57,17 +48,6 @@ class TaskController extends Controller
     {
         $task = Task::findOrFail($task);
         return new TaskResource($task);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Task  $tasks
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Task $tasks)
-    {
-        //
     }
 
     /**
@@ -98,8 +78,7 @@ class TaskController extends Controller
     public function destroy($id)
     {
         $task = Task::findOrFail($id);
-        if ($task->delete()) {
-            return new TaskResource($task);
-        }
+        $task->delete();
+        return new TaskResource($task);
     }
 }

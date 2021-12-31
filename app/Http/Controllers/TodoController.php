@@ -17,12 +17,12 @@ class TodoController extends Controller
 
     public function store(TodoRequest $request)
     {
-
         $todo = new Todo();
         $todo->name = $request->name;
         $todo->description = $request->description;
-        if ($todo->save())
-            return new TodoResource($todo);
+        
+        $todo->save();
+        return new TodoResource($todo);
     }
 
     public function show($id)
@@ -45,8 +45,7 @@ class TodoController extends Controller
     public function destroy($id)
     {
         $todo = Todo::findOrFail($id);
-        if ($todo->delete()) {
-            return new TodoResource($todo);
-        }
+        $todo->delete();
+        return new TodoResource($todo);
     }
 }
