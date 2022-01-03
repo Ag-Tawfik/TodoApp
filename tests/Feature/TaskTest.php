@@ -20,7 +20,7 @@ class TaskTest extends TestCase
     //     $todo = Todo::factory()->create();
     //     $task = Task::factory()->create(['todo_id' => $todo->id]);
 
-    //     $this->assertEquals(1, $todo->count()); 
+    //     $this->assertEquals(1, $todo->count());
 
     // }
 
@@ -45,16 +45,15 @@ class TaskTest extends TestCase
     public function testPostTask()
     {
         Todo::factory(5)->create();
+        Task::factory(5)->create();
         $updatedData = [
             'name' => 'Create Money',
-            'todo_id' => '5',
-            'description' => 'Brad_description',
-            'type' => 'Urgent',
-            'day' => 'Wednesday',
+            'description' => 'Braddescription',
+            'todo_id' => '1'
         ];
 
         $this->json('POST', '/api/tasks', $updatedData)
-            ->assertStatus(201);
+             ->assertStatus(201);
     }
     //
     public function testUpdateTask()
@@ -67,8 +66,6 @@ class TaskTest extends TestCase
             'todo_id' => '1',
             'name' => 'Marry',
             'description' => 'TTT',
-            'type' => 'Normal',
-            'day' => 'Tuesday',
         ];
 
         $this->json('PUT', "/api/tasks/1", $data)

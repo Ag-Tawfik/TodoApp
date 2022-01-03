@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
-use App\Http\Requests\TodoRequest;
+use App\Http\Requests\TodoCreateRequest;
+use App\Http\Requests\TodoUpdateRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TodoResource;
 
@@ -15,7 +16,7 @@ class TodoController extends Controller
         return TodoResource::collection($todos);
     }
 
-    public function store(TodoRequest $request)
+    public function store(TodoCreateRequest $request)
     {
         $todo = Todo::create($request->all());
         // return response()->json($todo, 201);
@@ -28,7 +29,7 @@ class TodoController extends Controller
         return new TodoResource($todo);
     }
 
-    public function update(TodoRequest $request, Todo $todo)
+    public function update(TodoUpdateRequest $request, Todo $todo)
     {
 
         $todo->update($request->all());
@@ -42,6 +43,6 @@ class TodoController extends Controller
 
         $todo->delete();
 
-        return response()->json('deleted', 204);
+        return response()->json(null, 204);
     }
 }

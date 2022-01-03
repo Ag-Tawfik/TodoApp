@@ -10,10 +10,10 @@ class Todo extends Model
 {
     use HasFactory;
 
-    protected $table = "todo";
+    protected $table = "todos";
 
-    protected $fillable = ['name', 'description'];
-    
+    protected $fillable = ['name', 'description', 'type', 'due_time', 'day'];
+
     protected $hidden = [
         'created_at',
         'updated_at'
@@ -21,6 +21,6 @@ class Todo extends Model
 
     public function tasks()
     {
-        return $this->hasMany(Task::class); 
+        return $this->hasMany(Task::class);
     }
 }

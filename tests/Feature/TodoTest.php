@@ -27,8 +27,11 @@ class TodoAppTest extends TestCase
     public function testPostTodo()
     {
         $PostdData = [
-            'name' => 'fdfdg',
-            'description' => 'xxxx'
+            'name' => 'Luna',
+            'description' => 'description For Luna',
+            'type' => 'Normal',
+            'due_time' => '01:00:00',
+            'day' => 'Monday'
         ];
 
         $this->json('POST', '/api/todos', $PostdData)
@@ -40,12 +43,15 @@ class TodoAppTest extends TestCase
         Todo::factory(5)->create();
 
         $data = [
-            'name' => 'DDDDD',
-            'description' => 'DDDD'
+            'name' => 'name1',
+            'description' => 'description1',
+            'type' => 'Normal',
+            //'due_time' => 'xxxx'
+            'day' => 'Monday'
         ];
 
-        $this->json('PUT', "/api/todos/3", $data)
-            ->assertSee('DDDDD')
+        $this->json('PUT', "/api/todos/1", $data)
+            ->assertSee('name1')
             ->assertStatus(200);
     }
     //
@@ -57,6 +63,6 @@ class TodoAppTest extends TestCase
 
         $this->json('DELETE', "/api/todos/$id_to_be_deleted/")->assertStatus(204);
 
-        $this->assertDatabaseMissing('todo', ['id' => $id_to_be_deleted]);
+        $this->assertDatabaseMissing('todos', ['id' => $id_to_be_deleted]);
     }
 }

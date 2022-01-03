@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TaskResource;
+use App\Http\Requests\TaskCreateRequest;
+use App\Http\Requests\TaskUpdateRequest;
 
 class TaskController extends Controller
 {
@@ -16,7 +17,7 @@ class TaskController extends Controller
         return TaskResource::collection($tasks);
     }
 
-    public function store(Request $request)
+    public function store(TaskCreateRequest $request)
     {
         $task = Task::create($request->all());
 
@@ -25,12 +26,11 @@ class TaskController extends Controller
 
     public function show(task $task)
     {
-        // $task = Task::findOrFail($task);
 
         return new TaskResource($task);
     }
 
-    public function update(Request $request, task $task)
+    public function update(TaskUpdateRequest $request, task $task)
     {      
         $task->update($request->all());
         return new TaskResource($task);
@@ -40,6 +40,6 @@ class TaskController extends Controller
     {
         $task->delete();
         
-        return response()->json('deleted', 204);
+        return response()->json(null, 204);
     }
 }

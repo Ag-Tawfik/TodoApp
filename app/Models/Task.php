@@ -12,7 +12,7 @@ class Task extends Model
 
     protected $table = "tasks";
 
-    protected $fillable = ['name', 'description', 'type', 'day', 'todo_id'];
+    protected $fillable = ['name', 'description', 'todo_id'];
 
     protected $hidden = [
         'created_at',

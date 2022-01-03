@@ -18,8 +18,6 @@ class CreateTasksTable extends Migration
             $table->integer('todo_id')->unsigned()->nullable();
             $table->string('name');
             $table->text('description');
-            $table->enum('type', ['Normal', 'Urgent']);
-            $table->enum('day', ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']);
             $table->timestamps();
         });
     }

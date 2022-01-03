@@ -18,8 +18,6 @@ class TaskFactory extends Factory
             'todo_id' => Todo::pluck('id')->random(),
             'name' => $this->faker->name,
             'description' => $this->faker->sentence,
-            'type' => $this->faker->randomElement(['Normal', 'Urgent']),
-            'day' => $this->faker->randomElement(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']),
         ];
     }
 }
