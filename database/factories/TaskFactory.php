@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Todo;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TaskFactory extends Factory
@@ -14,11 +15,10 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
-            'todo_id' => $this->faker->randomElement(['1', '5']),
+            'todo_id' => Todo::pluck('id')->random(),
             'name' => $this->faker->firstName(),
             'description' => $this->faker->paragraph(5),
             'type' => $this->faker->randomElement(['Normal', 'Urgent']),
-            //'time' => $this->faker->time('H'),
             'day' => $this->faker->randomElement(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']),
         ];
     }

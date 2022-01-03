@@ -17,35 +17,31 @@ class TodoController extends Controller
 
     public function store(TodoRequest $request)
     {
-        $todo = new Todo();
-        $todo->name = $request->name;
-        $todo->description = $request->description;
-        
-        $todo->save();
+        $todo = Todo::create($request->all());
+        // return response()->json($todo, 201);
+
+        return new TodoResource($todo, 201);
+    }
+
+    public function show(Todo $todo)
+    {
         return new TodoResource($todo);
     }
 
-    public function show($id)
+    public function update(TodoRequest $request, Todo $todo)
     {
-        $todo = Todo::findOrFail($id);
+
+        $todo->update($request->all());
         return new TodoResource($todo);
+
+        // return response()->json('Update', 200);
     }
 
-    public function update(TodoRequest $request, $id)
+    public function destroy(Todo $todo)
     {
 
-        $todo = Todo::findOrFail($id);
-        $todo->name = $request->name;
-        $todo->description = $request->description;
-
-        $todo->save();
-        return new TodoResource($todo);
-    }
-
-    public function destroy($id)
-    {
-        $todo = Todo::findOrFail($id);
         $todo->delete();
-        return new TodoResource($todo);
+
+        return response()->json('deleted', 204);
     }
 }

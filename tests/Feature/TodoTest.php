@@ -15,48 +15,48 @@ class TodoAppTest extends TestCase
      * @return void
      */
     //
-    public function testCreate()
+    public function testCreateTodo()
     {
-
         Todo::factory(5)->create();
 
-        $this->json('GET', '/api/todos/')
+        $this->json('GET', '/api/todos')
             ->assertSee(Todo::find(rand(1, 5))->name)
             ->assertStatus(200);
     }
     //
-    public function testPostMethod()
+    public function testPostTodo()
     {
-        $updatedData = array();
-        $updatedData['name'] = 'partner';
-        $updatedData['description'] = 'seller';
+        $PostdData = [
+            'name' => 'fdfdg',
+            'description' => 'xxxx'
+        ];
 
-        $response = $this->json('POST', '/api/todo', $updatedData);
-
-        $response
+        $this->json('POST', '/api/todos', $PostdData)
             ->assertStatus(201);
     }
     //
-    public function testUpdateMethod()
+    public function testUpdateTodo()
     {
-        Todo::factory()->create();
+        Todo::factory(5)->create();
 
         $data = [
-            'name' => 'Alex',
-            'description' => 'TTT',
+            'name' => 'DDDDD',
+            'description' => 'DDDD'
         ];
 
-        $this->put("/api/todo/1/", $data)
-            ->assertSee('Alex')
+        $this->json('PUT', "/api/todos/3", $data)
+            ->assertSee('DDDDD')
             ->assertStatus(200);
     }
     //
-    public function testDeleteMethod()
+    public function testDeleteTodo()
     {
-        $this->withoutExceptionHandling();
         Todo::factory()->times(5)->create();
+
         $id_to_be_deleted = random_int(1, 5);
-        $this->delete("/api/todo/$id_to_be_deleted/");
+
+        $this->json('DELETE', "/api/todos/$id_to_be_deleted/")->assertStatus(204);
+
         $this->assertDatabaseMissing('todo', ['id' => $id_to_be_deleted]);
     }
 }
