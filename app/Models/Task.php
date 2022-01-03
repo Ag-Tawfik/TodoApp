@@ -14,6 +14,11 @@ class Task extends Model
 
     protected $fillable = ['name', 'description', 'type', 'day', 'todo_id'];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
     public function todo()
     {
         return $this->belongsTo(Todo::class);
