@@ -30,7 +30,7 @@ class TodoAppTest extends TestCase
             'name' => 'Luna',
             'description' => 'description For Luna',
             'type' => 'Normal',
-            'due_time' => '01:00:00',
+            'due_time' => '01:30',
             'day' => 'Monday'
         ];
 
@@ -46,7 +46,7 @@ class TodoAppTest extends TestCase
             'name' => 'name1',
             'description' => 'description1',
             'type' => 'Normal',
-            //'due_time' => 'xxxx'
+            'due_time' => '12:00',
             'day' => 'Monday'
         ];
 
