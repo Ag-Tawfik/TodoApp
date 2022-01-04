@@ -10,26 +10,8 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class TaskTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    // public function test_a_todo_has_a_tasks()
-    // {
-    //     $todo = Todo::factory()->create();
-    //     $task = Task::factory()->create(['todo_id' => $todo->id]);
 
-    //     $this->assertEquals(1, $todo->count());
-
-    // }
-
-    // public function test_task_belongs_to_a_todo()
-    // {
-    //     $todo = Todo::factory()->create();
-    //     $this->assertEquals(1, $todo->count());
-    //     // $this->assertInstanceOf(Todo::class, $todo->name);
-    // }
+    private $endPoint = '/api/tasks/';
 
     public function testCreateTask()
     {
@@ -37,7 +19,7 @@ class TaskTest extends TestCase
 
         Task::factory(5)->create();
 
-        $this->json('GET', '/api/tasks')
+        $this->json('GET', $this->endPoint)
             ->assertSee(Task::find(rand(1, 5))->name)
             ->assertStatus(200);
     }
@@ -46,14 +28,14 @@ class TaskTest extends TestCase
     {
         Todo::factory(5)->create();
         Task::factory(5)->create();
-        $updatedData = [
+        $Data = [
             'name' => 'Create Money',
             'description' => 'Braddescription',
             'todo_id' => '1'
         ];
 
-        $this->json('POST', '/api/tasks', $updatedData)
-             ->assertStatus(201);
+        $this->json('POST', $this->endPoint, $Data)
+            ->assertStatus(201);
     }
     //
     public function testUpdateTask()
@@ -68,7 +50,7 @@ class TaskTest extends TestCase
             'description' => 'TTT',
         ];
 
-        $this->json('PUT', "/api/tasks/1", $data)
+        $this->json('PUT', $this->endPoint . "1", $data)
             ->assertSee('Marry')
             ->assertStatus(200);
     }
@@ -81,7 +63,7 @@ class TaskTest extends TestCase
 
         $id_to_be_deleted = random_int(1, 5);
 
-        $this->json('DELETE', "/api/tasks/$id_to_be_deleted/")->assertStatus(204);
+        $this->json('DELETE', $this->endPoint . "$id_to_be_deleted/")->assertStatus(204);
 
         $this->assertDatabaseMissing('tasks', ['id' => $id_to_be_deleted]);
     }

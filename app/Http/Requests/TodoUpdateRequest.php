@@ -31,7 +31,7 @@ class TodoUpdateRequest extends FormRequest
                 'required',
                 Rule::in(['Normal', 'Urgent']),
             ],
-            'due_time' => 'nullable',
+            'due_time' => 'required|date_format:H:i',
             'day' => [
                 'required',
                 Rule::in(['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday']),

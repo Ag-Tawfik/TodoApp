@@ -9,24 +9,21 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 class TodoAppTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic unit test example.
-     *
-     * @return void
-     */
-    //
+
+    private $endPoint = '/api/todos/';
+
     public function testCreateTodo()
     {
         Todo::factory(5)->create();
 
-        $this->json('GET', '/api/todos')
+        $this->json('GET', $this->endPoint)
             ->assertSee(Todo::find(rand(1, 5))->name)
             ->assertStatus(200);
     }
     //
     public function testPostTodo()
     {
-        $PostdData = [
+        $Data = [
             'name' => 'Luna',
             'description' => 'description For Luna',
             'type' => 'Normal',
@@ -34,7 +31,7 @@ class TodoAppTest extends TestCase
             'day' => 'Monday'
         ];
 
-        $this->json('POST', '/api/todos', $PostdData)
+        $this->json('POST', $this->endPoint, $Data)
             ->assertStatus(201);
     }
     //
@@ -50,7 +47,7 @@ class TodoAppTest extends TestCase
             'day' => 'Monday'
         ];
 
-        $this->json('PUT', "/api/todos/1", $data)
+        $this->json('PUT', $this->endPoint . "1", $data)
             ->assertSee('name1')
             ->assertStatus(200);
     }
@@ -61,7 +58,7 @@ class TodoAppTest extends TestCase
 
         $id_to_be_deleted = random_int(1, 5);
 
-        $this->json('DELETE', "/api/todos/$id_to_be_deleted/")->assertStatus(204);
+        $this->json('DELETE', $this->endPoint . "$id_to_be_deleted/")->assertStatus(204);
 
         $this->assertDatabaseMissing('todos', ['id' => $id_to_be_deleted]);
     }
