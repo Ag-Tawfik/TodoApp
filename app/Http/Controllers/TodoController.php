@@ -3,23 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\Todo;
-use App\Http\Requests\TodoCreateRequest;
-use App\Http\Requests\TodoUpdateRequest;
+use App\Events\NewCreatedTodoEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TodoResource;
+use App\Http\Requests\TodoCreateRequest;
+use App\Http\Requests\TodoUpdateRequest;
 
 class TodoController extends Controller
 {
     public function index()
     {
         $todos = Todo::with('tasks')->get();
+
         return TodoResource::collection($todos);
     }
 
     public function store(TodoCreateRequest $request)
     {
         $todo = Todo::create($request->all());
-        // return response()->json($todo, 201);
+
+        event(new NewCreatedTodoEvent('taoufik@mgssoftware.net'));
 
         return new TodoResource($todo, 201);
     }
@@ -31,16 +34,13 @@ class TodoController extends Controller
 
     public function update(TodoUpdateRequest $request, Todo $todo)
     {
-
         $todo->update($request->all());
-        return new TodoResource($todo);
 
-        // return response()->json('Update', 200);
+        return new TodoResource($todo);
     }
 
     public function destroy(Todo $todo)
     {
-
         $todo->delete();
 
         return response()->json(null, 204);
