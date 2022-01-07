@@ -47,7 +47,7 @@ class TodoAppTest extends TestCase
             'day' => 'Monday'
         ];
 
-        $this->json('PUT', $this->endPoint . "1", $data)
+        $this->json('PUT', $this->endPoint . "2", $data)
             ->assertSee('name1')
             ->assertStatus(200);
     }

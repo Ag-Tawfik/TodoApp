@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Event;
 use App\Events\NewCreatedTodoEvent;
 use Illuminate\Auth\Events\Registered;
 use App\Listeners\NewCreatedTodoListener;
